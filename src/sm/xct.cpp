@@ -99,7 +99,7 @@ template class w_auto_delete_array_t<stid_t>;
 #endif /* __GNUG__*/
 
 // definition of LOGTRACE is in crash.h
-#define DBGX(arg) DBG(<<" th."<<me()->id << " " << "tid." << _tid  arg)
+#define DBGX(arg) DBG(<<" th."<<me()->id << " " << "gtid. " << gtid()  arg)
 
 #define UNDO_FUDGE_FACTOR(nbytes) (3*(nbytes))
 
@@ -679,7 +679,7 @@ xct_t::cleanup(bool dispose_prepared)
 
             case xct_freeing_space:
             case xct_ended: {
-		    next = i.erase_and_next()
+                next = i.erase_and_next();
                     DBG(<< xd->tid() <<"deleting " 
                             << " w/ state=" << xd->state() );
                     DELETE_XCT(xd);
